@@ -1,35 +1,100 @@
-Autor: Maciej Włodarczak (https://eskim.pl)
+# Eskim Views Counter
 
-Wersja: 1.0
+**Prosty, lekki licznik odwiedzin stron w WordPressie z zapisem danych w bazie danych.**  
+Zgodny z PHP 8.2 i najnowszymi standardami WordPressa.
 
-Na podstawie artykułu: https://eskim.pl/zapisywanie-w-bazie-danych-wordpressa/
+---
 
-***
-Jeżeli przydał Ci się skrypt lub masz jakiekolwiek uwagi wejdź na stronę i zostaw komentarz (nie trzeba się rejestrować). Będzie mi bardzo miło.
-Będzie mi jeszcze milej, jeżeli zostawisz link do powyższej strony lub artykułu.
-***
+## ✨ Funkcje
 
-Skrypt zlicza odwiedziny na stronie
+- Zlicza unikalne odwiedziny na podstawie IP
+- Przypisuje wizyty do konkretnego posta lub strony
+- Identyfikuje kraj użytkownika (na podstawie API ip-api.com)
+- Rejestruje stronę odsyłającą (referer)
+- Tworzy 3 tabele w bazie danych:
+  - `eskim_views_counter_visitors`
+  - `eskim_views_counter_countries`
+  - `eskim_views_counter_referers`
+- Posiada prosty panel statystyk w Kokpicie WordPressa
+- Obsługuje PHP 8.2 i działa bez zewnętrznych zależności
 
-- tworzy tabele, zapisuje i odczytuje dane do bazy danych WordPressa
-- dodaje menu
-- wyświetla informacje o unikatowych odwiedzinach
-- sprawdza kraj odwiedzającego
-- sprawdza pochodzenie kupującego (z jakiej strony przyszedł)
+---
 
+## 🛠️ Wymagania
 
--- INSTALACJA --
+- PHP 8.2 lub nowszy  
+- Dostęp do połączeń HTTP (`wp_remote_get`) dla API geolokalizacji
 
-Należy przenieść wtyczkę do katalogu z pluginami w WordPress i uruchomić z poziomu pluginów w WordPress.
+---
 
+## 🚀 Instalacja
 
--- DEINSTALACJA --
+1. Skopiuj pliki wtyczki do katalogu `wp-content/plugins/eskim-views-counter/`
+2. Aktywuj wtyczkę z poziomu Kokpitu WordPressa
+3. Gotowe – zliczanie wizyt zaczyna się automatycznie w stopce strony (`wp_footer`)
 
-Należy usunąć wtyczkę z poziomu menu wtyczki - przycisk "Usuń tabele i wyłącz wtyczkę". To spowodouje usunięcie tabel w bazie danych.
+---
 
+## 🧼 Deinstalacja
 
--- ODPOWIEDZIALNOŚĆ --
+Wtyczka zawiera plik `uninstall.php`, dzięki któremu po jej odinstalowaniu:
+- automatycznie usuwane są wszystkie tabele z bazy danych
 
-Autor nie ponosi żadnej odpowiedzialności z tytułu błędów w skrypcie, albo niewłaściwego jego wykorzystania.
+---
 
-Korzystasz na własną odpowiedzialność.
+## 📊 Panel statystyk
+
+Po aktywacji wtyczki w Kokpicie pojawia się pozycja **Licznik odwiedzin**, która pokazuje:
+- Łączną liczbę unikalnych wizyt
+- Listę odwiedzin według kraju
+- Listę odwiedzin według strony odsyłającej
+
+---
+
+## 🧾 Historia wersji
+
+### Wersja 1.2
+
+- W pełni zgodna z PHP 8.2
+- Zastąpienie `file_get_contents()` przez `wp_remote_get()`
+- Dodano prosty panel admina (statystyki)
+- Lepsze typowanie funkcji, refaktoryzacja kodu
+
+### Wersja 1.1
+
+- Refaktoryzacja całej wtyczki: zmiana nazw funkcji, struktura danych
+- Nowy prefiks `eskim_views_counter_` dla lepszej spójności
+- Obsługa IP, walidacja danych, przygotowanie pod modularność
+
+### Wersja 1.0
+
+- Pierwsza publiczna wersja (opis: [Artykuł na blogu](https://eskim.pl/zapisywanie-w-bazie-danych-wordpressa/))
+
+---
+
+## 💡 Plany na przyszłość
+
+- Filtrowanie po dacie i zakresie
+- Eksport CSV
+- Dashboard z wykresami (Chart.js)
+- Tryb headless (REST API endpoints)
+
+---
+
+## ✍️ Autor
+
+Maciej Włodarczak – [eskim.pl](https://eskim.pl)  
+[GitHub: Eskim83](https://github.com/Eskim83)
+
+---
+
+## ☕ Wesprzyj rozwój
+
+Jeśli ta wtyczka Ci się przydała — możesz postawić mi kawę:  
+👉 [https://www.buymeacoffee.com/eskim](https://www.buymeacoffee.com/eskim)
+
+---
+
+## 🔒 Licencja
+
+GPL v3 or later – darmowa do użytku prywatnego i komercyjnego.
